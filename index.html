@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Druid of Elemental Chaos - Character Sheet</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Druid of Elemental Chaos</h1>
+            <p class="subtitle">Elemental Points Tracker</p>
+        </header>
+
+        <!-- Component 1: Siphoned Elements Tracker -->
+        <section class="siphoned-elements">
+            <h2>Siphoned Elements</h2>
+            <div class="elements-grid">
+                <div class="element-row" data-element="fire">
+                    <div class="element-info">
+                        <span class="element-name">Fire</span>
+                        <div class="element-controls">
+                            <button class="btn btn-minus" data-element="fire">-</button>
+                            <input type="number" class="ep-input" data-element="fire" min="0" max="25" value="0">
+                            <button class="btn btn-plus" data-element="fire">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="element-row" data-element="water">
+                    <div class="element-info">
+                        <span class="element-name">Water</span>
+                        <div class="element-controls">
+                            <button class="btn btn-minus" data-element="water">-</button>
+                            <input type="number" class="ep-input" data-element="water" min="0" max="25" value="0">
+                            <button class="btn btn-plus" data-element="water">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="element-row" data-element="earth">
+                    <div class="element-info">
+                        <span class="element-name">Earth</span>
+                        <div class="element-controls">
+                            <button class="btn btn-minus" data-element="earth">-</button>
+                            <input type="number" class="ep-input" data-element="earth" min="0" max="25" value="0">
+                            <button class="btn btn-plus" data-element="earth">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="element-row" data-element="air">
+                    <div class="element-info">
+                        <span class="element-name">Air</span>
+                        <div class="element-controls">
+                            <button class="btn btn-minus" data-element="air">-</button>
+                            <input type="number" class="ep-input" data-element="air" min="0" max="25" value="0">
+                            <button class="btn btn-plus" data-element="air">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="total-display">
+                <span>Total EP: <span id="total-ep">0</span>/25</span>
+                <button id="reset-ep-btn" class="reset-btn">Reset EP</button>
+            </div>
+        </section>
+
+        <!-- Component 2: Elemental Overload Display -->
+        <section class="elemental-overload">
+            <h2>Elemental Overload Penalties</h2>
+            <div class="dominant-element">
+                <span>Dominant Element: <span id="dominant-element">None</span></span>
+            </div>
+            <ul id="penalties-list">
+                <li class="no-penalties">No penalties at current EP level.</li>
+            </ul>
+        </section>
+
+        <!-- Component 2.5: Spellcasting Stats -->
+        <section class="spellcasting-stats compact">
+            <div class="stats-inline">
+                <label for="wisdom-mod">Wis:</label>
+                <input type="number" id="wisdom-mod" value="0" min="-5" max="10">
+                <label for="proficiency-bonus">Prof.:</label>
+                <input type="number" id="proficiency-bonus" value="2" min="0" max="9">
+                <span class="stat-label">Mod:</span>
+                <span class="stat-value" id="spellcasting-modifier">+2</span>
+                <span class="stat-label">DC:</span>
+                <span class="stat-value" id="spell-save-dc">DC 10</span>
+            </div>
+        </section>
+
+        <!-- Component 3: Available Echoed Spells -->
+        <section class="echoed-spells">
+            <div class="spells-header">
+                <h2>Available Echoed Spells</h2>
+                <div class="spells-controls">
+                    <label class="show-all-toggle">
+                        <input type="checkbox" id="show-all-spells">
+                        <span>Show All Spells</span>
+                    </label>
+                </div>
+            </div>
+            <div id="spells-container" class="spells-grid">
+                <!-- Spells will be dynamically populated here -->
+            </div>
+        </section>
+    </div>
+
+    <!-- Additional Features Section -->
+    <section class="additional-features">
+        <h2>Additional Features</h2>
+        
+        <div class="feature-category">
+            <h3>Core Class Features</h3>
+            
+            <div class="feature-item">
+                <h4>Siphon Element</h4>
+                <ul>
+                    <li>As an action, you can attempt to draw elemental energy from a significant source of an element (e.g., a bonfire for Fire, a stream for Water, a strong gust for Air, rich soil/large rock for Earth) within 30 feet.</li>
+                    <li>You gain EP of the corresponding type. The DM determines the availability and potency of elemental sources. A particularly potent or large source might grant more points or allow siphoning for multiple turns.</li>
+                    <li>When you siphon an element, the source is visibly diminished or temporarily exhausted (e.g., a patch of grass withers, a small fire dims, water stills, a breeze fades). When draining larger quantities, bonfires may turn to ash, rivers may run dry, forests may wither and the air might become stale and toxic.</li>
+                </ul>
+            </div>
+            
+            <div class="feature-item">
+                <h4>Elemental Points</h4>
+                <ul>
+                    <li>You start with 0 EP and they are lost after a long rest.</li>
+                </ul>
+            </div>
+            
+            <div class="feature-item">
+                <h4>Spell Slot Recovery</h4>
+                <ul>
+                    <li>You regain 4 levels worth of spell slots during every short rest (how you divide these levels is up to you). This feature can be used up to twice per day.</li>
+                </ul>
+                <div class="checklist">
+                    <span class="checklist-label">Uses remaining:</span>
+                    <div class="checklist-items">
+                        <button class="checklist-item" data-feature="spell-slot-recovery" data-use="1">1</button>
+                        <button class="checklist-item" data-feature="spell-slot-recovery" data-use="2">2</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="feature-item">
+                <h4>Luna's Urging</h4>
+                <ul>
+                    <li>Luna's presence becomes more distinct. You might hear her whispers, feel her emotions, or receive visions, especially when siphoning or overloaded. This can be a source of plot hooks or guidance (or misdirection!).</li>
+                    <li>Mechanically, once per long rest, when you fail a saving throw, you can choose to succeed instead as Luna's power surges through you. If you do so, you immediately gain 1d4 EP of a random type (roll a d4). 1 → Fire. 2 → Water. 3 → Earth. 4 → Air.</li>
+                </ul>
+                <div class="checklist">
+                    <span class="checklist-label">Uses remaining:</span>
+                    <div class="checklist-items">
+                        <button class="checklist-item" data-feature="lunas-urging" data-use="1">1</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html> 
